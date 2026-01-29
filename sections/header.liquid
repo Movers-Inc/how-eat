@@ -654,6 +654,245 @@
     }
   }
 
+  /* Menu link title - center align with chevron */
+  .menu-list__link-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Chevron icon styling */
+  .menu-list__chevron {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+
+  .menu-list__chevron svg {
+    width: 10px;
+    height: 6px;
+    color: currentColor;
+  }
+
+  /* Rotate chevron when menu is open OR hovered */
+  .menu-list__link[aria-expanded="true"] .menu-list__chevron,
+  .menu-list__list-item:hover > .menu-list__link .menu-list__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Increase menu spacing */
+  .menu-list {
+    --menu-horizontal-gap: var(--gap-2xl);
+  }
+
+  .overflow-menu::part(list) {
+    gap: 0 var(--gap-2xl);
+  }
+
+  /* Black backdrop overlay - starts below header */
+  .menu-list__list-item::before {
+    content: '';
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none; /* Always none - so hover ends when mouse leaves white area */
+  }
+
+  .menu-list__list-item:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Create action sheet white background on hover for ALL menu items */
+  .menu-list__list-item::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    top: 100%;
+    min-height: 300px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-top: 1px solid #f0f0f0;
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  .menu-list__list-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto; /* White area keeps hover active */
+  }
+
+  /* Hide ::after if submenu exists - submenu will show instead */
+  .menu-list__list-item:has(.menu-list__submenu)::after {
+    display: none;
+  }
+
+  /* Also hide backdrop if submenu exists */
+  .menu-list__list-item:has(.menu-list__submenu)::before {
+    display: none;
+  }
+
+  /* Black backdrop for submenu items - starts below header */
+  .menu-list__submenu::before {
+    content: '';
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none; /* Always none - so hover ends when mouse leaves white area */
+  }
+
+  .menu-list__list-item:hover > .menu-list__submenu::before,
+  .menu-list__submenu:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Position submenu below entire header */
+  .menu-list__submenu {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    top: 100% !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+    border-top: 1px solid #f0f0f0;
+    z-index: 998 !important;
+    margin-top: 0 !important;
+    clip-path: none !important;
+    height: auto !important;
+  }
+
+  /* Make header row relative for submenu positioning */
+  .header__row {
+    position: relative;
+  }
+
+  /* Menu list items need relative positioning for ::after */
+  .menu-list__list-item {
+    position: relative;
+  }
+
+  /* Adjust submenu to appear below header row */
+  .header__row--bottom .menu-list__submenu,
+  .header__row--top .menu-list__submenu {
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  /* Override default hidden state */
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu {
+    visibility: hidden;
+    --submenu-content-opacity: 0;
+    transition: none !important;
+    pointer-events: none;
+  }
+
+  /* Force submenu to show on hover with fade in */
+  .menu-list__list-item:hover > .menu-list__submenu,
+  .menu-list__list-item:focus-within > .menu-list__submenu,
+  .menu-list__submenu:hover {
+    visibility: visible !important;
+    --submenu-content-opacity: 1 !important;
+    opacity: 1 !important;
+    display: block !important;
+    clip-path: none !important;
+    height: auto !important;
+    animation: fadeInDown 0.3s ease-out forwards;
+    pointer-events: auto !important; /* Keep hover active in white area */
+  }
+
+  /* Also make submenu content visible */
+  .menu-list__list-item:hover .menu-list__submenu-inner,
+  .menu-list__submenu:hover .menu-list__submenu-inner {
+    opacity: 1 !important;
+  }
+
+  /* Submenu inner styling - constrain content width */
+  .menu-list__submenu-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--padding-2xl) var(--padding-xl);
+    background: #ffffff;
+  }
+
+  /* Mega menu container full width */
+  .mega-menu {
+    width: 100%;
+    background: #ffffff;
+  }
+
+  /* Remove overflow-menu background animation */
+  .overflow-menu::after {
+    display: none !important;
+  }
+
+  /* Smooth appearance animation for submenu */
+  .menu-list__list-item:hover > .menu-list__submenu {
+    animation: fadeInDown 0.2s ease-out forwards;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+      visibility: visible;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+
+  /* Enhanced mega menu link hover effect */
+  .mega-menu__link {
+    transition: all 0.2s ease;
+    padding: var(--padding-2xs) 0;
+    color: #333;
+  }
+
+  .mega-menu__link:hover {
+    color: #000;
+    font-weight: 500;
+    padding-left: var(--padding-2xs);
+  }
+
+  /* Parent link styling in mega menu */
+  .mega-menu__link--parent {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: var(--padding-xs);
+    color: #000;
+  }
+
   /* Ensure smooth transitions for all interactive elements */
   header-menu,
   .header-actions__action,
@@ -677,6 +916,8 @@
     --header-padding: var(--padding-sm);
     --font-paragraph--line-height: 1;
     contain: layout style;
+    position: relative;
+    z-index: 999;
   }
 
   .header:has(#Details-menu-drawer-container[open]) {
@@ -732,16 +973,16 @@
     }
   }
 
-  /* Optimize layout performance for hidden menus */
+  /* Override content-visibility to always show on hover */
   .header-menu .menu-list__submenu {
-    content-visibility: auto;
-    contain-intrinsic-size: 0px 500px;
+    content-visibility: visible !important;
   }
 
   /* Force visibility when open/animating to prevent layout issues */
   .header-menu details[open] .menu-list__submenu,
-  .header-menu .menu-list__submenu[data-active] {
-    content-visibility: visible;
+  .header-menu .menu-list__submenu[data-active],
+  .menu-list__list-item:hover .menu-list__submenu {
+    content-visibility: visible !important;
   }
 {% endstylesheet %}
 

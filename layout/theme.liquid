@@ -31,6 +31,19 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 
+    {% if template contains 'collection' %}
+      <style>
+        @media screen and (min-width: 750px) {
+          [data-template*="collection"] .section {
+            grid-template-columns: 
+              minmax(var(--page-margin), 1fr)
+              minmax(0, 1440px)
+              minmax(var(--page-margin), 1fr) !important;
+          }
+        }
+      </style>
+    {% endif %}
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
