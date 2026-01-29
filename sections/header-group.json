@@ -41,7 +41,10 @@
           "blocks": {}
         }
       },
-      "block_order": ["announcement_promo_1", "announcement_promo_2"],
+      "block_order": [
+        "announcement_promo_1",
+        "announcement_promo_2"
+      ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -91,8 +94,8 @@
         }
       },
       "settings": {
-        "logo_position": "center",
-        "menu_position": "left",
+        "logo_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
         "show_search": true,
         "search_position": "right",
@@ -122,5 +125,8 @@
       }
     }
   },
-  "order": ["header_announcements_9jGBFp", "header_section"]
+  "order": [
+    "header_announcements_9jGBFp",
+    "header_section"
+  ]
 }
