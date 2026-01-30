@@ -60,6 +60,30 @@
   %}
 </div>
 
+{% stylesheet %}
+  /* Set collection card image size to 330x330 */
+  .ui-test-collection-list .collection-card__image,
+  .ui-test-collection-list .card-gallery {
+    width: 330px;
+    height: 330px;
+    max-width: 100%;
+  }
+
+  .ui-test-collection-list .collection-card__image img,
+  .ui-test-collection-list .card-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Ensure 4 columns on desktop */
+  @media screen and (min-width: 750px) {
+    .ui-test-collection-list .resource-list--grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.collection_list",
