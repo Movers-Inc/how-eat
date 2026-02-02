@@ -54,6 +54,10 @@
         <span>
           <span>
             {{- add_to_cart_text | default: default_add_to_cart_text -}}
+            {% if product %}
+              {% assign variant_price = product.selected_or_first_available_variant.price | money %}
+              <span style="margin-left: 4px;">- {{ variant_price }}</span>
+            {% endif %}
           </span>
         </span>
       </span>

@@ -33,50 +33,60 @@
 
     {% if template contains 'collection' %}
       <style>
-        /* Only apply 1440px constraint to sections WITHOUT banner image */
-        @media screen and (min-width: 750px) {
-          [data-template*="collection"] .section:not(:first-child) {
-            grid-template-columns: 
-              minmax(var(--page-margin), 1fr)
-              minmax(0, 1440px)
-              minmax(var(--page-margin), 1fr) !important;
-          }
+        /* Banner section - full width, no constraints */
+        [data-template*="collection"] .section:first-child,
+        [data-template*="collection"] .section:first-child > *,
+        [data-template*="collection"] .section:first-child .section-background {
+          max-width: none !important;
+          width: 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
         }
 
-        /* Banner section - keep full width grid but constrain text content */
-        @media screen and (min-width: 750px) {
-          [data-template*="collection"] .section:first-child {
-            grid-template-columns: 
-              minmax(var(--page-margin), 1fr)
-              minmax(0, 1440px)
-              minmax(var(--page-margin), 1fr) !important;
-          }
-        }
-
-        /* Banner image - full width (span all columns) */
-        [data-template*="collection"] .image-block {
+        /* Banner image block and all parents - full width */
+        [data-template*="collection"] .image-block,
+        [data-template*="collection"] .image-block > *,
+        [data-template*="collection"] .section:first-child .image-block {
           height: 250px !important;
-          grid-column: 1 / -1 !important;
           width: 100vw !important;
-          margin-left: calc(-50vw + 50%) !important;
-          margin-right: calc(-50vw + 50%) !important;
+          max-width: 100vw !important;
+          margin-left: calc(50% - 50vw) !important;
+          margin-right: calc(50% - 50vw) !important;
+          position: relative !important;
+          left: 0 !important;
+          right: 0 !important;
         }
 
         [data-template*="collection"] .image-block img {
-          width: 100%;
+          width: 100% !important;
           height: 250px !important;
-          object-fit: cover;
+          object-fit: cover !important;
         }
 
-        /* Text blocks (title, description) - constrained to center column */
-        @media screen and (min-width: 750px) {
-          [data-template*="collection"] .text-block {
-            grid-column: 2 !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+        /* Text blocks below banner (title, description) - 1440px max-width */
+        [data-template*="collection"] .text-block {
+          max-width: 1440px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: max(20px, var(--page-margin)) !important;
+          padding-right: max(20px, var(--page-margin)) !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
+        /* Product grid section - 1440px max-width */
+        [data-template*="collection"] .section:not(:first-child) {
+          max-width: 1440px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: max(20px, var(--page-margin)) !important;
+          padding-right: max(20px, var(--page-margin)) !important;
+        }
+
+        @media screen and (min-width: 750px) {
           [data-template*="collection"] .image-block {
             height: 450px !important;
           }
@@ -85,12 +95,78 @@
             height: 450px !important;
           }
         }
+      </style>
+    {% endif %}
 
-        /* Center other content within 1440px container */
+    {% if template contains 'product' %}
+      <style>
+        /* Product page content max-width constraint */
+        [data-template*="product"] .section:not(.breadcrumb-wrapper) {
+          max-width: 1440px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: max(20px, var(--page-margin)) !important;
+          padding-right: max(20px, var(--page-margin)) !important;
+        }
+
+        [data-template*="product"] .product-information__container {
+          max-width: 1440px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: max(20px, var(--page-margin)) !important;
+          padding-right: max(20px, var(--page-margin)) !important;
+        }
+
+        /* Product title font size on desktop */
         @media screen and (min-width: 750px) {
-          [data-template*="collection"] .section > *:not(.image-block) {
-            grid-column: 2;
+          [data-template*="product"] .product__title,
+          [data-template*="product"] h1.product__title {
+            font-size: 36px !important;
           }
+        }
+
+        /* Price layout - compare at price on left, sale price on right */
+        [data-template*="product"] product-price [ref="priceContainer"],
+        [data-template*="product"] product-price div[ref="priceContainer"] {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          gap: 12px !important;
+          flex-wrap: wrap !important;
+        }
+
+        [data-template*="product"] product-price [ref="priceContainer"] > * {
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+
+        /* Sale price (actual price) styling */
+        [data-template*="product"] product-price .price {
+          color: #a94600 !important;
+          font-size: 25px !important;
+          font-weight: 600 !important;
+        }
+
+        /* Compare at price (original price) styling */
+        [data-template*="product"] product-price .compare-at-price {
+          color: #000 !important;
+          font-size: 20px !important;
+          text-decoration: line-through !important;
+        }
+
+        /* Add to cart button styling */
+        [data-template*="product"] .add-to-cart-button,
+        [data-template*="product"] button[name="add"],
+        [data-template*="product"] .product-form__submit {
+          background: #fff !important;
+          color: #000 !important;
+          border: 1px solid #000 !important;
+        }
+
+        [data-template*="product"] .add-to-cart-button:hover,
+        [data-template*="product"] button[name="add"]:hover,
+        [data-template*="product"] .product-form__submit:hover {
+          background: #f5f5f5 !important;
         }
       </style>
     {% endif %}

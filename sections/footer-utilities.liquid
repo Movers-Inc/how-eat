@@ -15,6 +15,14 @@
 </div>
 
 {% stylesheet %}
+  /* Footer utilities background color */
+  .footer-utilities,
+  .footer-utilities .section-background,
+  .footer-utilities .section {
+    background-color: #282928 !important;
+    border-top: 0.5px solid #d0d0d0 !important;
+  }
+
   .utilities {
     width: 100%;
     display: flex;
@@ -22,8 +30,8 @@
     align-items: center;
     gap: var(--gap);
     text-wrap: nowrap;
-    border-top: var(--border-width) solid var(--color-border);
-    color: var(--color-foreground-muted);
+    border-top: none;
+    color: #fff !important;
 
     @media screen and (min-width: 750px) {
       display: grid;
@@ -36,7 +44,11 @@
   }
 
   .utilities a {
-    color: var(--color-foreground-muted);
+    color: #fff !important;
+  }
+
+  .utilities * {
+    color: #fff !important;
   }
 
   .utilities > * {

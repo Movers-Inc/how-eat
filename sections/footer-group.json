@@ -56,7 +56,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>Menu</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -81,7 +81,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -109,24 +109,15 @@
             "text_f9CFLH"
           ]
         },
-        "email_signup_crihX7": {
-          "type": "email-signup",
+        "menu_footer_1": {
+          "type": "menu",
           "settings": {
-            "width": "fill",
-            "custom_width": 100,
+            "menu": "",
+            "heading": "Quick Links",
             "inherit_color_scheme": true,
-            "heading": "",
-            "heading_preset": "h3",
             "color_scheme": "",
-            "border_style": "all",
-            "border_width": 1,
-            "border_radius": 100,
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
+            "heading_preset": "h4",
+            "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -137,7 +128,7 @@
       },
       "block_order": [
         "group_H6VpwJ",
-        "email_signup_crihX7"
+        "menu_footer_1"
       ],
       "name": "t:names.footer",
       "settings": {

@@ -1,5 +1,56 @@
 
 
+<!-- Breadcrumb Navigation -->
+<div class="breadcrumb-wrapper">
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-separator">></span>
+    {% if product.collections.first %}
+      <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      <span class="breadcrumb-separator">></span>
+    {% endif %}
+    <span class="breadcrumb-current">{{ product.title }}</span>
+  </div>
+</div>
+
+<style>
+  .breadcrumb-wrapper {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px 0;
+    margin-bottom: 32px;
+  }
+
+  .breadcrumb {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--page-margin);
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+
+  .breadcrumb a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: #000;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 8px;
+    color: #999;
+  }
+
+  .breadcrumb-current {
+    color: #000;
+    font-weight: 500;
+  }
+</style>
+
 <script type="application/ld+json">
   {{ closest.product | structured_data }}
 </script>
