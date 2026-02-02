@@ -243,43 +243,43 @@
 
   /* Product card image size - 260x380 */
   @media screen and (min-width: 750px) {
-    .product-card .card-gallery,
-    .product-grid__card .card-gallery {
+    .card-gallery {
       width: 260px !important;
       height: 380px !important;
-      min-height: 380px !important;
-      max-height: 380px !important;
       background-color: #4FAB67 !important;
-      display: flex !important;
-      align-items: flex-start !important;
-      justify-content: center !important;
+      overflow: visible !important;
       position: relative !important;
-      overflow: hidden !important;
     }
 
-    /* Force card-gallery container size */
-    .card-gallery__media,
-    .card-gallery__item {
-      width: 100% !important;
+    .card-gallery *:not(img) {
+      opacity: 1 !important;
+      visibility: visible !important;
       height: 100% !important;
-      display: flex !important;
-      align-items: flex-start !important;
-      justify-content: center !important;
-      opacity: 1 !important;
-      visibility: visible !important;
     }
 
-    .product-card .card-gallery img,
-    .product-grid__card .card-gallery img,
-    .card-gallery__item img {
-      max-width: 100% !important;
+    .card-gallery img {
+      width: 100% !important;
+      height: auto !important;
       max-height: 100% !important;
-      object-fit: contain !important;
       display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      z-index: 10 !important;
+      object-fit: cover !important;
     }
+
+    /* Hide carousel arrows and other controls */
+    .product-card .slideshow-control,
+    .product-card .slideshow-arrows,
+    .card-gallery .slideshow-control,
+    .card-gallery .slideshow-arrows {
+      display: none !important;
+    }
+
+    /* Hide product badges (Sale, Sold Out, etc.) */
+    .product-badges,
+    .product-badges__badge {
+      display: none !important;
+    }
+
+    /* Quick-add button styles removed - ready for custom implementation */
   }
 {% endstylesheet %}
 
