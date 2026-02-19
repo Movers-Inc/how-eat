@@ -175,11 +175,33 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    {% comment %} Mobile-first view: on PC, center content with max-width 450px and side margins {% endcomment %}
+    <style>
+      @media screen and (min-width: 451px) {
+        body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background: #F5F5F5;
+        }
+        body .mobile-view-wrapper {
+          width: 100%;
+          max-width: 450px;
+          min-height: 100svh;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          background: var(--color-background);
+        }
+      }
+    </style>
+
     {{ content_for_header }}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    <div class="mobile-view-wrapper">
     <div id="header-group">
       {% sections 'header-group' %}
     </div>
@@ -253,5 +275,6 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+    </div>
   </body>
 </html>
